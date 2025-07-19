@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- colors.xml -->
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_600">#FF5600E8</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_100">#FFE6DEFF</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="background_light">#FFF5F5F5</color>
+
+
+    <color name="white_70">#B3FFFFFF</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#FF212121</color>
+    <color name="text_secondary">#FF757575</color>
+
+    <!-- Background colors -->
+    <color name="divider">#FFEEEEEE</color>
+
+    <!-- Chip background colors -->
+    <color name="chip_background_blue">#FFE3F2FD</color>
+    <color name="chip_background_green">#FFE8F5E9</color>
+    <color name="chip_background_purple">#FFF3E5F5</color>
+    <color name="chip_background_amber">#FFFFF8E1</color>
+    <color name="chip_background_red">#FFFFEBEE</color>
+    <color name="chip_background_gray">#FFF5F5F5</color>
+
+    <!-- Status colors -->
+    <color name="green_50">#FFE8F5E9</color>
+    <color name="green_100">#FFC8E6C9</color>
+    <color name="green_200">#BBF7D0</color>
+    <color name="green_600">#FF43A047</color>
+    <color name="green_800">#FF2E7D32</color>
+
+    <color name="blue_50">#FFE3F2FD</color>
+    <color name="blue_100">#FFBBDEFB</color>
+    <color name="blue_600">#FF1E88E5</color>
+    <color name="blue_800">#FF1565C0</color>
+
+    <color name="red_50">#FFFFEBEE</color>
+    <color name="red_100">#FFFFCDD2</color>
+    <color name="red_200">#FFEF9A9A</color>
+    <color name="red_500">#FFF44336</color>
+    <color name="red_600">#FFE53935</color>
+    <color name="red_800">#FFC62828</color>
+
+    <color name="yellow_400">#FFFFEE58</color>
+    <color name="yellow_600">#FFFDD835</color>
+
+    <color name="gray_200">#FFEEEEEE</color>
+    <color name="gray_300">#FFE0E0E0</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_500">#FF9E9E9E</color>
+    <color name="gray_600">#9E9E9E</color>
+    <color name="light_grey">#D3D3D3</color>
+    <color name="indigo_900_50">#801C1B5A</color>
+    <color name="purple_50">#F3E5F5</color>
+    <color name="purple_900">#4A148C</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_800">#424242</color>
+
+
+    <color name="blue_500">#3B82F6</color>
+    <color name="blue_700">#1D4ED8</color>
+    <color name="gray_50">#F9FAFB</color>
+    <color name="gray_100">#F3F4F6</color>
+    <color name="green_500">#10B981</color>
+    <color name="cyan_500">#06B6D4</color>
+
+
+    <color name="blue_primary">#1e40af</color>
+    <color name="blue_secondary">#3b82f6</color>
+    <color name="blue_light">#dbeafe</color>
+    <color name="blue_dark">#1e3a8a</color>
+
+    <color name="indigo_primary">#4f46e5</color>
+    <color name="indigo_light">#e0e7ff</color>
+
+    <color name="cyan_primary">#0891b2</color>
+    <color name="cyan_light">#ecfeff</color>
+
+    <color name="sky_primary">#0284c7</color>
+    <color name="sky_light">#e0f2fe</color>
+
+
+    <color name="text_tertiary">#94a3b8</color>
+
+
+    <!-- App colors -->
+    <color name="accent">#536DFE</color>
+
+    <color name="background_start">#F5F3FF</color>
+    <color name="background_end">#F3E8FF</color>
+
+
+    <color name="text_secondary_light">#E1E1FC</color>
+
+    <color name="shimmer_color">#DDDDDD</color>
+
+    <!-- Grade colors -->
+    <color name="grade_a">#4CAF50</color>
+    <color name="grade_b">#2196F3</color>
+    <color name="grade_c">#9C27B0</color>
+    <color name="grade_d">#FFC107</color>
+    <color name="grade_f">#F44336</color>
+
+
+    <color name="yellow_50">#FEFCE8</color>
+    <color name="yellow_100">#FEF3C7</color>
+    <color name="yellow_200">#FDE68A</color>
+
+    <color name="yellow_800">#92400E</color>
+
+
+    <color name="white_50">#80FFFFFF</color>
+
+    <color name="gray_900">#111827</color>
+
+
+    <!-- PDF Viewer Colors -->
+    <color name="overlay_background">#E6000000</color>
+    <color name="pdf_background">#F5F5F5</color>
+    <color name="zoom_level_bg">#F0F0F0</color>
+
+    <!-- Subject Colors -->
+    <color name="math_chip_bg">#E3F2FD</color>
+    <color name="physics_chip_bg">#E8F5E8</color>
+    <color name="chemistry_chip_bg">#F3E5F5</color>
+    <color name="biology_chip_bg">#FFF3E0</color>
+    <color name="english_chip_bg">#FCE4EC</color>
+    <color name="default_chip_bg">#F5F5F5</color>
+
+
+    <!-- Text Colors -->
+
+    <color name="text_hint">#BDBDBD</color>
+
+    <!-- Background Colors -->
+    <color name="divider_color">#E0E0E0</color>
+
+
+    <!-- Icon Colors -->
+    <color name="icon_tint">#9E9E9E</color>
+
+
+    <!-- Chip Colors -->
+    <color name="chip_background">#F0F0F0</color>
+    <color name="chip_stroke">#E0E0E0</color>
+
+
+    <color name="warning">#F59E0B</color>
+    <color name="warning_dark">#D97706</color>
+
+
+    <!-- Primary Colors -->
+    <color name="primary">#6366F1</color>
+    <color name="primary_dark">#4F46E5</color>
+    <color name="primary_light">#A5B4FC</color>
+    <color name="primary_variant">#818CF8</color>
+
+    <!-- Secondary Colors -->
+    <color name="secondary">#EC4899</color>
+    <color name="secondary_dark">#DB2777</color>
+    <color name="secondary_light">#F9A8D4</color>
+
+    <!-- Success Colors (Present) -->
+    <color name="success">#10B981</color>
+    <color name="success_dark">#059669</color>
+    <color name="success_light">#A7F3D0</color>
+    <color name="success_bg">#ECFDF5</color>
+
+    <!-- Error Colors (Absent) -->
+    <color name="error">#EF4444</color>
+    <color name="error_dark">#DC2626</color>
+    <color name="error_light">#FECACA</color>
+    <color name="error_bg">#FEF2F2</color>
+
+    <!-- Neutral Colors -->
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F8FAFC</color>
+    <color name="background">#F1F5F9</color>
+    <color name="on_surface">#1E293B</color>
+    <color name="on_surface_variant">#64748B</color>
+    <color name="outline">#E2E8F0</color>
+
+    <!-- Card Colors -->
+    <color name="card_gradient_start">#EEF2FF</color>
+    <color name="card_gradient_end">#E0E7FF</color>
+    <color name="card_shadow">#1E293B</color>
+
+    <!-- Button Colors -->
+    <color name="button_present">#10B981</color>
+    <color name="button_present_pressed">#059669</color>
+    <color name="button_absent">#EF4444</color>
+    <color name="button_absent_pressed">#DC2626</color>
+
+    <!-- Status Colors -->
+    <color name="status_present_bg">#DCFCE7</color>
+    <color name="status_present_text">#166534</color>
+    <color name="status_absent_bg">#FEE2E2</color>
+    <color name="status_absent_text">#991B1B</color>
+
+
+    <color name="green_700">#FF388E3C</color>
+
+
+    <color name="red_700">#FFC53030</color>
+    <color name="orange_600">#FFDD6B20</color>
+
+
+    <color name="background_dark">#FF121212</color>
+    <color name="surface_light">#FFFFFFFF</color>
+    <color name="surface_dark">#FF1E1E1E</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary_light">#FF000000</color>
+    <color name="text_primary_dark">#FFFFFFFF</color>
+
+    <color name="text_secondary_dark">#FFB3B3B3</color>
+
+
+    <color name="primary_blue">#3498DB</color>
+    <color name="primary_blue_dark">#2980B9</color>
+    <color name="secondary_blue">#5DADE2</color>
+    <color name="background_gray">#F5F5F5</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="text_muted">#BDC3C7</color>
+    <color name="success_green">#27AE60</color>
+    <color name="success_green_light">#58D68D</color>
+    <color name="error_red">#E74C3C</color>
+    <color name="error_red_light">#F1948A</color>
+    <color name="header_dark">#34495E</color>
+
+
+    <color name="gray">#808080</color>
+    <color name="dark_gray">#404040</color>
+    <color name="blue">#2196F3</color>
+    <color name="green">#4CAF50</color>
+    <color name="orange">#FF9800</color>
+
+
+</resources>
+
+

@@ -1,0 +1,7 @@
+<!-- drawable/gradient_banner_overlay.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="#99000000"
+        android:endColor="#00000000"
+        android:angle="90" />
+</shape>

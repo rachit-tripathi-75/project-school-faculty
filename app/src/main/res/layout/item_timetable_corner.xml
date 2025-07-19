@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="60dp"
+    android:background="@drawable/cell_header_corner"
+    android:gravity="center"
+    android:text="Week View"
+    android:textColor="#1976D2"
+    android:textStyle="bold" />

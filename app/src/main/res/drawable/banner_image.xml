@@ -1,0 +1,8 @@
+<!-- drawable/banner_image.xml -->
+<!-- This would typically be a bitmap image, but for this example, I'll create a drawable -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="#7F5A83"
+        android:endColor="#0D324D"
+        android:angle="135" />
+</shape>

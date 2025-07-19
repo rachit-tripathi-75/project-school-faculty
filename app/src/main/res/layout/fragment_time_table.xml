@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
+    tools:context=".fragments.TimeTableFragment">
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_background"
+        tools:context=".ClassScheduleActivity">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/llSunday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/_20sdp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/sunday" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="No class today"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llNoTimeTableDataFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/_20sdp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/nodatafound" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="No Time Table Found"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llNoInternetFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/_20sdp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/nointernet" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="No Internet found\nCan't fetch time table"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal">
+
+            <LinearLayout
+                android:id="@+id/llTimeTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+
+                <TableLayout
+                    android:id="@+id/tlTimeTable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+
+                    <!-- Header Row -->
+                    <TableRow
+                        android:layout_gravity="center"
+                        android:background="@color/gray_50"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+
+
+                        <!-- Period headers will be added dynamically -->
+                        <include layout="@layout/period_header_item" />
+
+                        <include layout="@layout/period_header_item2" />
+
+                        <include layout="@layout/period_header_item3" />
+
+                        <include layout="@layout/period_header_item4" />
+
+                        <include layout="@layout/period_header_item5" />
+
+                        <include layout="@layout/period_header_item6" />
+
+                        <include layout="@layout/period_header_item7" />
+
+                        <include layout="@layout/period_header_item8" />
+
+                        <include layout="@layout/period_header_item9" />
+                    </TableRow>
+
+                    <!-- Wednesday Row -->
+                    <TableRow
+                        android:padding="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+
+
+                        <!-- Class cells will be added dynamically -->
+                        <include
+                            android:id="@+id/Period1"
+                            layout="@layout/class_item" />
+
+                        <include
+                            android:id="@+id/Period2"
+                            layout="@layout/class_item" />
+
+                        <include
+                            android:id="@+id/Period3"
+                            layout="@layout/class_item" />
+
+                        <include
+                            android:id="@+id/Period4"
+                            layout="@layout/class_item" />
+
+                        <include
+                            android:id="@+id/Period5"
+                            layout="@layout/class_item" />
+
+                        <include
+                            android:id="@+id/Period6"
+                            layout="@layout/class_item" />
+
+                        <include
+                            android:id="@+id/Period7"
+                            layout="@layout/class_item" />
+
+                        <include
+                            android:id="@+id/Period8"
+                            layout="@layout/class_item" />
+
+                        <include
+                            android:id="@+id/Period9"
+                            layout="@layout/class_item" />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </HorizontalScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="@color/white">-->
+
+    <!--        <androidx.core.widget.NestedScrollView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="vertical"-->
+    <!--                android:padding="16dp">-->
+
+    <!--                &lt;!&ndash; Today's Timetable Banner (replacing Welcome Banner) &ndash;&gt;-->
+    <!--                <androidx.cardview.widget.CardView-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginBottom="16dp"-->
+    <!--                    app:cardCornerRadius="12dp"-->
+    <!--                    app:cardElevation="2dp">-->
+
+    <!--                    <LinearLayout-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:orientation="vertical">-->
+
+    <!--                        &lt;!&ndash; Header with day, date and time &ndash;&gt;-->
+    <!--                        <LinearLayout-->
+    <!--                            android:layout_width="match_parent"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:background="@drawable/gradient_purple"-->
+    <!--                            android:orientation="vertical"-->
+    <!--                            android:padding="16dp">-->
+
+    <!--                            <LinearLayout-->
+    <!--                                android:layout_width="match_parent"-->
+    <!--                                android:layout_height="wrap_content"-->
+    <!--                                android:orientation="horizontal">-->
+
+    <!--                                <LinearLayout-->
+    <!--                                    android:layout_width="0dp"-->
+    <!--                                    android:layout_height="wrap_content"-->
+    <!--                                    android:layout_weight="1"-->
+    <!--                                    android:orientation="vertical">-->
+
+    <!--                                    <TextView-->
+    <!--                                        android:id="@+id/dayTextView"-->
+    <!--                                        android:layout_width="wrap_content"-->
+    <!--                                        android:layout_height="wrap_content"-->
+    <!--                                        android:text="Monday"-->
+    <!--                                        android:textColor="@color/white"-->
+    <!--                                        android:textSize="18sp"-->
+    <!--                                        android:textStyle="bold" />-->
+
+    <!--                                    <TextView-->
+    <!--                                        android:id="@+id/dateTextView"-->
+    <!--                                        android:layout_width="wrap_content"-->
+    <!--                                        android:layout_height="wrap_content"-->
+    <!--                                        android:alpha="0.9"-->
+    <!--                                        android:text="April 29, 2025"-->
+    <!--                                        android:textColor="@color/white"-->
+    <!--                                        android:textSize="14sp" />-->
+    <!--                                </LinearLayout>-->
+
+    <!--                                <LinearLayout-->
+    <!--                                    android:layout_width="wrap_content"-->
+    <!--                                    android:layout_height="wrap_content"-->
+    <!--                                    android:background="@drawable/time_background"-->
+    <!--                                    android:gravity="center_vertical"-->
+    <!--                                    android:paddingHorizontal="12dp"-->
+    <!--                                    android:paddingVertical="6dp">-->
+
+    <!--                                    <ImageView-->
+    <!--                                        android:layout_width="16dp"-->
+    <!--                                        android:layout_height="16dp"-->
+    <!--                                        android:layout_marginEnd="8dp"-->
+    <!--                                        android:src="@drawable/ic_clock"-->
+    <!--                                        app:tint="@color/white" />-->
+
+    <!--                                    <TextView-->
+    <!--                                        android:id="@+id/timeTextView"-->
+    <!--                                        android:layout_width="wrap_content"-->
+    <!--                                        android:layout_height="wrap_content"-->
+    <!--                                        android:text="10:30 AM"-->
+    <!--                                        android:textColor="@color/white"-->
+    <!--                                        android:textSize="14sp"-->
+    <!--                                        android:textStyle="bold" />-->
+    <!--                                </LinearLayout>-->
+    <!--                            </LinearLayout>-->
+
+    <!--                            &lt;!&ndash; Current Period &ndash;&gt;-->
+    <!--                            <TextView-->
+    <!--                                android:layout_width="wrap_content"-->
+    <!--                                android:layout_height="wrap_content"-->
+    <!--                                android:layout_marginTop="16dp"-->
+    <!--                                android:alpha="0.8"-->
+    <!--                                android:text="CURRENT PERIOD"-->
+    <!--                                android:textColor="@color/white"-->
+    <!--                                android:textSize="12sp"-->
+    <!--                                android:textStyle="bold" />-->
+
+    <!--                            <LinearLayout-->
+    <!--                                android:layout_width="match_parent"-->
+    <!--                                android:layout_height="wrap_content"-->
+    <!--                                android:layout_marginTop="8dp"-->
+    <!--                                android:background="@drawable/current_period_background"-->
+    <!--                                android:orientation="horizontal"-->
+    <!--                                android:padding="12dp">-->
+
+    <!--                                <LinearLayout-->
+    <!--                                    android:layout_width="0dp"-->
+    <!--                                    android:layout_height="wrap_content"-->
+    <!--                                    android:layout_weight="1"-->
+    <!--                                    android:orientation="horizontal">-->
+
+
+    <!--                                    <LinearLayout-->
+    <!--                                        android:layout_width="wrap_content"-->
+    <!--                                        android:layout_height="wrap_content"-->
+    <!--                                        android:orientation="vertical">-->
+
+    <!--                                        <TextView-->
+    <!--                                            android:id="@+id/currentSubjectTextView"-->
+    <!--                                            android:layout_width="wrap_content"-->
+    <!--                                            android:layout_height="wrap_content"-->
+    <!--                                            android:text="English"-->
+    <!--                                            android:textColor="@color/white"-->
+    <!--                                            android:textSize="16sp"-->
+    <!--                                            android:textStyle="bold" />-->
+
+    <!--                                        <TextView-->
+    <!--                                            android:id="@+id/currentTeacherRoomTextView"-->
+    <!--                                            android:layout_width="wrap_content"-->
+    <!--                                            android:layout_height="wrap_content"-->
+    <!--                                            android:alpha="0.9"-->
+    <!--                                            android:text="Ms. ABCD • Room 205"-->
+    <!--                                            android:textColor="@color/white"-->
+    <!--                                            android:textSize="12sp" />-->
+    <!--                                    </LinearLayout>-->
+    <!--                                </LinearLayout>-->
+
+    <!--                                <TextView-->
+    <!--                                    android:id="@+id/currentTimeTextView"-->
+    <!--                                    android:layout_width="wrap_content"-->
+    <!--                                    android:layout_height="wrap_content"-->
+    <!--                                    android:text="10:30 - 11:20"-->
+    <!--                                    android:textColor="@color/white"-->
+    <!--                                    android:textSize="14sp"-->
+    <!--                                    android:textStyle="bold" />-->
+    <!--                            </LinearLayout>-->
+
+    <!--                            &lt;!&ndash; Next Period &ndash;&gt;-->
+    <!--                            <LinearLayout-->
+    <!--                                android:layout_width="wrap_content"-->
+    <!--                                android:layout_height="wrap_content"-->
+    <!--                                android:layout_marginTop="16dp"-->
+    <!--                                android:gravity="center_vertical"-->
+    <!--                                android:orientation="horizontal">-->
+
+    <!--                                <TextView-->
+    <!--                                    android:layout_width="wrap_content"-->
+    <!--                                    android:layout_height="wrap_content"-->
+    <!--                                    android:alpha="0.8"-->
+    <!--                                    android:text="NEXT"-->
+    <!--                                    android:textColor="@color/white"-->
+    <!--                                    android:textSize="12sp"-->
+    <!--                                    android:textStyle="bold" />-->
+
+    <!--                                <ImageView-->
+    <!--                                    android:layout_width="12dp"-->
+    <!--                                    android:layout_height="12dp"-->
+    <!--                                    android:layout_marginHorizontal="4dp"-->
+    <!--                                    android:alpha="0.8"-->
+    <!--                                    android:src="@drawable/ic_arrow_right"-->
+    <!--                                    app:tint="@color/white" />-->
+    <!--                            </LinearLayout>-->
+
+    <!--                            <LinearLayout-->
+    <!--                                android:layout_width="match_parent"-->
+    <!--                                android:layout_height="wrap_content"-->
+    <!--                                android:layout_marginTop="8dp"-->
+    <!--                                android:background="@drawable/current_period_background"-->
+    <!--                                android:orientation="horizontal"-->
+    <!--                                android:padding="12dp">-->
+
+    <!--                                <LinearLayout-->
+    <!--                                    android:layout_width="0dp"-->
+    <!--                                    android:layout_height="wrap_content"-->
+    <!--                                    android:layout_weight="1"-->
+    <!--                                    android:orientation="vertical">-->
+
+    <!--                                    <TextView-->
+    <!--                                        android:id="@+id/nextSubjectTextView"-->
+    <!--                                        android:layout_width="wrap_content"-->
+    <!--                                        android:layout_height="wrap_content"-->
+    <!--                                        android:text="Computer Science"-->
+    <!--                                        android:textColor="@color/white"-->
+    <!--                                        android:textSize="16sp"-->
+    <!--                                        android:textStyle="bold" />-->
+
+    <!--                                    <TextView-->
+    <!--                                        android:id="@+id/nextTeacherRoomTextView"-->
+    <!--                                        android:layout_width="wrap_content"-->
+    <!--                                        android:layout_height="wrap_content"-->
+    <!--                                        android:alpha="0.9"-->
+    <!--                                        android:text="Mr. XYZ • Lab 1"-->
+    <!--                                        android:textColor="@color/white"-->
+    <!--                                        android:textSize="12sp" />-->
+    <!--                                </LinearLayout>-->
+
+    <!--                                <TextView-->
+    <!--                                    android:id="@+id/nextTimeTextView"-->
+    <!--                                    android:layout_width="wrap_content"-->
+    <!--                                    android:layout_height="wrap_content"-->
+    <!--                                    android:text="11:30 - 12:20"-->
+    <!--                                    android:textColor="@color/white"-->
+    <!--                                    android:textSize="14sp"-->
+    <!--                                    android:textStyle="bold" />-->
+    <!--                            </LinearLayout>-->
+    <!--                        </LinearLayout>-->
+
+    <!--                        &lt;!&ndash;                        &lt;!&ndash; Today's Schedule &ndash;&gt;&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                        <LinearLayout&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                            android:layout_width="match_parent"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                            android:background="@color/indigo_900_50"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                            android:orientation="vertical"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                            android:padding="16dp">&ndash;&gt;-->
+
+    <!--                        &lt;!&ndash;                            <LinearLayout&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:layout_width="match_parent"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:orientation="horizontal">&ndash;&gt;-->
+
+    <!--                        &lt;!&ndash;                                <TextView&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:layout_width="0dp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:layout_weight="1"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:text="Today's Schedule"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:textColor="@color/white"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:textSize="16sp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:textStyle="bold" />&ndash;&gt;-->
+
+    <!--                        &lt;!&ndash;                                <LinearLayout&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:id="@+id/fullScheduleButton"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:background="@drawable/schedule_button_background"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:gravity="center_vertical"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:paddingHorizontal="8dp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                    android:paddingVertical="4dp">&ndash;&gt;-->
+
+    <!--                        &lt;!&ndash;                                    <TextView&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:text="Full Schedule"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:textColor="@color/white"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:textSize="12sp" />&ndash;&gt;-->
+
+    <!--                        &lt;!&ndash;                                    <ImageView&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:layout_width="12dp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:layout_height="12dp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:layout_marginStart="4dp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        android:src="@drawable/ic_arrow_right"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                        app:tint="@color/white" />&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                </LinearLayout>&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                            </LinearLayout>&ndash;&gt;-->
+
+    <!--                        &lt;!&ndash;                            <androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:id="@+id/scheduleRecyclerView"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:layout_width="match_parent"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:layout_height="120dp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:layout_marginTop="8dp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:clipToPadding="false"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:orientation="vertical"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                android:paddingEnd="4dp"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                                tools:listitem="@layout/item_schedule" />&ndash;&gt;-->
+    <!--                        &lt;!&ndash;                        </LinearLayout>&ndash;&gt;-->
+    <!--                    </LinearLayout>-->
+    <!--                </androidx.cardview.widget.CardView>-->
+
+    <!--                &lt;!&ndash; Dashboard Grid (same as before) &ndash;&gt;-->
+    <!--                <GridLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:alignmentMode="alignMargins"-->
+    <!--                    android:columnCount="3"-->
+    <!--                    android:columnOrderPreserved="false"-->
+    <!--                    android:rowCount="5">-->
+
+    <!--                    &lt;!&ndash; Notice Board &ndash;&gt;-->
+    <!--                    <androidx.cardview.widget.CardView-->
+    <!--                        android:id="@+id/noticeBoard"-->
+    <!--                        android:layout_width="0dp"-->
+    <!--                        android:layout_height="0dp"-->
+    <!--                        android:layout_rowWeight="1"-->
+    <!--                        android:layout_columnWeight="1"-->
+    <!--                        android:layout_margin="4dp"-->
+    <!--                        app:cardBackgroundColor="@color/purple_50"-->
+    <!--                        app:cardCornerRadius="12dp"-->
+    <!--                        app:cardElevation="0dp">-->
+
+    <!--                        <LinearLayout-->
+    <!--                            android:layout_width="match_parent"-->
+    <!--                            android:layout_height="match_parent"-->
+    <!--                            android:gravity="center"-->
+    <!--                            android:orientation="vertical"-->
+    <!--                            android:padding="16dp">-->
+
+    <!--                            <ImageView-->
+    <!--                                android:layout_width="48dp"-->
+    <!--                                android:layout_height="48dp"-->
+    <!--                                android:layout_marginBottom="8dp"-->
+    <!--                                android:src="@drawable/ic_notice_board"-->
+    <!--                                app:tint="@color/gray_700" />-->
+
+    <!--                            <TextView-->
+    <!--                                android:layout_width="wrap_content"-->
+    <!--                                android:layout_height="wrap_content"-->
+    <!--                                android:text="Notice Board"-->
+    <!--                                android:textAlignment="center"-->
+    <!--                                android:textColor="@color/gray_800"-->
+    <!--                                android:textSize="12sp" />-->
+    <!--                        </LinearLayout>-->
+    <!--                    </androidx.cardview.widget.CardView>-->
+
+    <!--                    &lt;!&ndash; Rest of the grid items remain the same &ndash;&gt;-->
+    <!--                    &lt;!&ndash; ... &ndash;&gt;-->
+
+    <!--                    &lt;!&ndash; Fee Deposit - Added in a prominent position &ndash;&gt;-->
+    <!--                    <androidx.cardview.widget.CardView-->
+    <!--                        android:id="@+id/feeDeposit"-->
+    <!--                        android:layout_width="0dp"-->
+    <!--                        android:layout_height="0dp"-->
+    <!--                        android:layout_rowWeight="1"-->
+    <!--                        android:layout_columnWeight="1"-->
+    <!--                        android:layout_margin="4dp"-->
+    <!--                        app:cardBackgroundColor="@color/purple_50"-->
+    <!--                        app:cardCornerRadius="12dp"-->
+    <!--                        app:cardElevation="2dp">-->
+
+    <!--                        <LinearLayout-->
+    <!--                            android:layout_width="match_parent"-->
+    <!--                            android:layout_height="match_parent"-->
+    <!--                            android:gravity="center"-->
+    <!--                            android:orientation="vertical"-->
+    <!--                            android:padding="16dp">-->
+
+    <!--                            <FrameLayout-->
+    <!--                                android:layout_width="48dp"-->
+    <!--                                android:layout_height="48dp"-->
+    <!--                                android:layout_marginBottom="8dp">-->
+
+    <!--                                <ImageView-->
+    <!--                                    android:layout_width="match_parent"-->
+    <!--                                    android:layout_height="match_parent"-->
+    <!--                                    android:src="@drawable/ic_fee_deposit"-->
+    <!--                                    app:tint="@color/purple_700" />-->
+
+    <!--                                &lt;!&ndash; Optional: Badge for new feature &ndash;&gt;-->
+    <!--                                <TextView-->
+    <!--                                    android:layout_width="wrap_content"-->
+    <!--                                    android:layout_height="wrap_content"-->
+    <!--                                    android:layout_gravity="top|end"-->
+    <!--                                    android:background="@drawable/badge_background"-->
+    <!--                                    android:paddingHorizontal="4dp"-->
+    <!--                                    android:paddingVertical="1dp"-->
+    <!--                                    android:text="New"-->
+    <!--                                    android:textColor="@color/white"-->
+    <!--                                    android:textSize="8sp" />-->
+    <!--                            </FrameLayout>-->
+
+    <!--                            <TextView-->
+    <!--                                android:layout_width="wrap_content"-->
+    <!--                                android:layout_height="wrap_content"-->
+    <!--                                android:text="Fee Deposit"-->
+    <!--                                android:textAlignment="center"-->
+    <!--                                android:textColor="@color/purple_900"-->
+    <!--                                android:textSize="12sp"-->
+    <!--                                android:textStyle="bold" />-->
+    <!--                        </LinearLayout>-->
+    <!--                    </androidx.cardview.widget.CardView>-->
+
+    <!--                    &lt;!&ndash; Remaining grid items &ndash;&gt;-->
+    <!--                    &lt;!&ndash; ... &ndash;&gt;-->
+
+    <!--                </GridLayout>-->
+    <!--            </LinearLayout>-->
+    <!--        </androidx.core.widget.NestedScrollView>-->
+    <!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+</FrameLayout>
