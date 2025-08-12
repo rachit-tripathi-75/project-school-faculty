@@ -128,7 +128,7 @@ class MarksEntryFragment : Fragment() {
         ApiClient.assignedSubjectInstance.getAssignedSubjects(
             "application/x-www-form-urlencoded",
             "ci_session=jb231bl4eo9i74ueppu4rvhca8nvkdhs",
-            "33"
+            PrefsManager.getTeacherDetailedInformation(requireContext()).data.id
         ).enqueue(object : retrofit2.Callback<AssignedSubjectResponse> {
             override fun onResponse(
                 call: Call<AssignedSubjectResponse>,

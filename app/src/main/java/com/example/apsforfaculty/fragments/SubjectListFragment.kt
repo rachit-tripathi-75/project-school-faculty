@@ -61,7 +61,7 @@ class SubjectListFragment : Fragment() {
 
     private fun loadSubjects() {
 
-        val s = SectionWithSubjectRequest("33")
+        val s = SectionWithSubjectRequest(PrefsManager.getTeacherDetailedInformation(requireContext()).data.id)
 
         ApiClient.subjectRequestInstance.getSectionWithSubjects(
             "application/json",
@@ -74,7 +74,7 @@ class SubjectListFragment : Fragment() {
                     val s = response.body()
                     if (s?.status == 1) {
                         if (s.data.isEmpty()) {
-                            Snackbar.make(binding.root, "No data found", Snackbar.LENGTH_LONG).show()
+                            Snackbar.make(binding.root, s.Msg, Snackbar.LENGTH_LONG).show()
                             Log.d("sectionWithSubjectsTAG", "inside if-data-is-empty: " + response.body()?.Msg.toString())
                         } else if (s.data.isNotEmpty()) {
                             fillSubjects(s.data)
