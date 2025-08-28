@@ -23,6 +23,7 @@ import com.example.apsforfaculty.responses.Section
 import com.example.apsforfaculty.responses.SectionWithSubjectResponse
 import com.example.apsforfaculty.responses.ViewAttendanceResponse
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import retrofit2.Call
 
 class SubjectListFragment : Fragment() {
@@ -53,6 +54,8 @@ class SubjectListFragment : Fragment() {
             },
             onViewClick = { subject ->
                 (activity as UploadMarksActivity).navigateToViewMarks(subject)
+                val gson = Gson()
+                Log.d("chosensubjectxxxx", gson.toJson(subject))
             }
         )
 

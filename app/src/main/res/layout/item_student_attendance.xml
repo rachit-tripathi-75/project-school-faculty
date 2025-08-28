@@ -17,7 +17,7 @@
             android:id="@+id/tvStudentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="John Doe"
+            android:text=""
             android:textColor="#2C3E50"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -57,11 +57,11 @@
             android:id="@+id/tvAttendanceStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/status_present"
+            android:background="@drawable/status_notmarked"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Present"
-            android:textColor="#27AE60"
+            android:text="Not Marked"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 

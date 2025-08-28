@@ -90,23 +90,23 @@ class UploadMarksFragment : Fragment() {
             override fun onResponse(call: Call<ExamListResponse>, response: retrofit2.Response<ExamListResponse>) {
 
                 if (response.isSuccessful) {
-                    Log.d("examListTAG", response.body()?.Msg.toString())
+                    Log.d("examListTAG", response.body()?.msg.toString())
                     val s = response.body()
                     if (s?.status == 1) {
                         if (s.data.isEmpty()) {
                             Snackbar.make(binding.root, "No data found", Snackbar.LENGTH_LONG).show()
-                            Log.d("viewAttendanceTAG", "inside if-data-is-empty: " + response.body()?.Msg.toString())
+                            Log.d("viewAttendanceTAG", "inside if-data-is-empty: " + response.body()?.msg.toString())
                         } else if (s.data.isNotEmpty()) {
                             fillSpinner(s.data)
-                            Log.d("examListTAG", "inside if-data-is-not-empty: " + response.body()?.Msg.toString())
+                            Log.d("examListTAG", "inside if-data-is-not-empty: " + response.body()?.msg.toString())
                         }
                     } else {
-                        Snackbar.make(binding.root, s?.Msg!!, Snackbar.LENGTH_LONG).show()
-                        Log.d("examListTAG", "inside else-status != 1: " + response.body()?.Msg.toString())
+                        Snackbar.make(binding.root, s?.msg!!, Snackbar.LENGTH_LONG).show()
+                        Log.d("examListTAG", "inside else-status != 1: " + response.body()?.msg.toString())
                     }
 
                 } else {
-                    Log.d("examListTAG", "inside else-unsuccessful: " + response.body()?.Msg.toString())
+                    Log.d("examListTAG", "inside else-unsuccessful: " + response.body()?.msg.toString())
                     Toast.makeText(requireContext(), "Some error occurred.", Toast.LENGTH_SHORT).show()
                 }
             }

@@ -1,40 +1,42 @@
 package com.example.apsforfaculty.fragments
 
-
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.apsforfaculty.R
 import com.example.apsforfaculty.adapters.ViewMarksAdapter
 import com.example.apsforfaculty.classes.ApiClient
+import com.example.apsforfaculty.classes.PrefsManager
 import com.example.apsforfaculty.databinding.FragmentViewMarksBinding
-import com.example.apsforfaculty.models.UploadMarksSubject
 import com.example.apsforfaculty.models.UploadMarksStudent
+import com.example.apsforfaculty.models.UploadMarksSubject
+import com.example.apsforfaculty.responses.AssignedSubjectResponse
+import com.example.apsforfaculty.responses.ExamListExam
 import com.example.apsforfaculty.responses.ExamListResponse
 import com.example.apsforfaculty.responses.StudentViewedMark
 import com.example.apsforfaculty.responses.ViewMarksResponse
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
-import kotlin.collections.mutableListOf
+import retrofit2.Callback
+import retrofit2.Response
 
 class ViewMarksFragment : Fragment() {
 
     private lateinit var subject: UploadMarksSubject
-    private lateinit var spinnerExam: Spinner
-    private lateinit var spinnerSubject: Spinner
-    private lateinit var btnSubmit: Button
-    private lateinit var recyclerView: RecyclerView
     private lateinit var viewMarksAdapter: ViewMarksAdapter
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var binding: FragmentViewMarksBinding
+    private var _binding: FragmentViewMarksBinding? = null
+    private val binding get() = _binding!!
+
+    // ## CHANGE 1: Property to hold the fetched list of exams
+    private var examList: List<ExamListExam> = emptyList()
+
+    // ... (Companion object and onCreate remain the same) ...
 
     companion object {
         private const val ARG_SUBJECT_ID = "subject_id"
@@ -65,166 +67,168 @@ class ViewMarksFragment : Fragment() {
                 subjectName = bundle.getString(ARG_SUBJECT_NAME, "")
             )
         }
-        sharedPreferences = requireContext().getSharedPreferences("student_marks", Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentViewMarksBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentViewMarksBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupViews(view)
-        setupSpinners()
+        // Set the chosen subject name
+        binding.tvChosenSubject.text = subject.subjectName
+
         setupRecyclerView()
         setupClickListeners()
+
+        // ## CHANGE 2: Fetch exams from API to populate the spinner
+        fetchExams()
     }
 
-    private fun setupViews(view: View) {
-        spinnerExam = view.findViewById(R.id.spinner_exam_view)
-        spinnerSubject = view.findViewById(R.id.spinner_subject_view)
-        btnSubmit = view.findViewById(R.id.btn_submit_view)
-        recyclerView = view.findViewById(R.id.recycler_marks_view)
+    // ## CHANGE 3: New function to fetch exams
+    private fun fetchExams() {
+        // You can show a progress bar here
+        ApiClient.examListInstance.getExamList("ci_session=88kve9h6dthcqpc5pbat6d9dab63b0rm")
+            .enqueue(object : Callback<ExamListResponse> {
+                override fun onResponse(call: Call<ExamListResponse>, response: Response<ExamListResponse>) {
+                    // Hide progress bar here
+                    if (response.isSuccessful && response.body()?.status == 1) {
+                        val exams = response.body()?.data
+                        if (!exams.isNullOrEmpty()) {
+                            this@ViewMarksFragment.examList = exams // Store the full list
+                            val examNames = exams.map { it.name } // Get just the names for the spinner
+                            setupExamSpinner(examNames)
+                        } else {
+                            Toast.makeText(context, "No active exams found", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(context, "Failed to load exams", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ExamListResponse>, t: Throwable) {
+                    // Hide progress bar here
+                    Log.e("ViewMarksFragment", "onFailure: fetchExams", t)
+                    Toast.makeText(context, "Network error while fetching exams", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
-    private fun setupSpinners() {
-        // Setup exam spinner
-        val exams = arrayOf("Unit test 1", "Unit test 2", "Mid Term", "Final Exam")
-        val examAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, exams)
+    // ## CHANGE 4: Renamed and updated spinner setup function
+    private fun setupExamSpinner(examNames: List<String>) {
+        val examAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, examNames)
         examAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerExam.adapter = examAdapter
-
-        // Setup subject spinner
-        val subjects = arrayOf("Hindi Literature", "General Knowledge", "Moral Science", "Hindi Language")
-        val subjectAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, subjects)
-        subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerSubject.adapter = subjectAdapter
+        binding.spinnerExamView.adapter = examAdapter
     }
 
     private fun setupRecyclerView() {
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerMarksView.layoutManager = LinearLayoutManager(context)
         viewMarksAdapter = ViewMarksAdapter()
-        recyclerView.adapter = viewMarksAdapter
+        binding.recyclerMarksView.adapter = viewMarksAdapter
     }
 
     private fun setupClickListeners() {
-        btnSubmit.setOnClickListener {
-            val selectedExam = spinnerExam.selectedItem.toString()
-            loadMarks(selectedExam)
+        binding.btnSubmitView.setOnClickListener {
+            val chosenSubject = binding.tvChosenSubject.text.toString()
+            val selectedPosition = binding.spinnerExamView.selectedItemPosition
+
+            // ## CHANGE 5: Get the ID from the stored list based on spinner position
+            if (selectedPosition != -1 && examList.isNotEmpty()) {
+                val selectedExamId = examList[selectedPosition].id
+                fetchSubjectDetailsAndLoadMarks(chosenSubject, selectedExamId)
+            } else {
+                Toast.makeText(context, "Please select an exam.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun loadMarks(examName: String) {
-//        val key = "marks_${subject.id}_${getExamId(examName)}"
-//        val marksString = sharedPreferences.getString(key, "")
-//
-//        if (marksString.isNullOrEmpty()) {
-//            Toast.makeText(context, "No marks found for selected exam", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-
-
-        ApiClient.viewMarksInstance.viewMarks(
+    // ## CHANGE 6: Updated function to accept examId
+    private fun fetchSubjectDetailsAndLoadMarks(chosenSubject: String, examId: String) {
+        val teacherId = PrefsManager.getTeacherDetailedInformation(requireContext()).data.id
+        ApiClient.assignedSubjectInstance.getAssignedSubjects(
             "application/x-www-form-urlencoded",
-            "ci_session=e000a4cj27gv598f5dn2fpc7joc71ejr",
-            examId = "1",
-            sectionId = "1",
-            sstId = "89").enqueue(object : retrofit2.Callback<ViewMarksResponse> {
-            override fun onResponse(call: Call<ViewMarksResponse>, response: retrofit2.Response<ViewMarksResponse>) {
-
-                if (response.isSuccessful) {
-                    Log.d("viewMarksTAG", response.body()?.Msg.toString())
-                    val s = response.body()
-                    if (s?.status == 1) {
-                        if (s.data.isEmpty()) {
-                            Snackbar.make(binding.root, "No data found", Snackbar.LENGTH_LONG).show()
-                            Log.d("viewMarksTAG", "inside if-data-is-empty: " + response.body()?.Msg.toString())
-                        } else if (s.data.isNotEmpty()) {
-                            fillViewMarksData(s.data)
-                            Log.d("viewMarksTAG", "inside if-data-is-not-empty: " + response.body()?.Msg.toString())
-                        }
-                    } else {
-                        Snackbar.make(binding.root, s?.Msg!!, Snackbar.LENGTH_LONG).show()
-                        Log.d("viewMarksTAG", "inside else-status != 1: " + response.body()?.Msg.toString())
+            "ci_session=YOUR_DYNAMIC_SESSION_ID",
+            teacherId
+        ).enqueue(object : Callback<AssignedSubjectResponse> {
+            override fun onResponse(call: Call<AssignedSubjectResponse>, response: Response<AssignedSubjectResponse>) {
+                if (response.isSuccessful && response.body()?.status == 1) {
+                    val foundSubject = response.body()?.data?.find {
+                        it.sub_name.trim().equals(chosenSubject, ignoreCase = true)
                     }
 
+                    if (foundSubject != null) {
+                        Log.d("ViewMarksFragment", "Found subject: sst_id=${foundSubject.sst_id}, section_id=${foundSubject.section_id}")
+                        // ## CHANGE 7: Pass the examId to loadMarks
+                        loadMarks(
+                            examId = examId,
+                            sectionId = foundSubject.section_id,
+                            sstId = foundSubject.sst_id
+                        )
+                    } else {
+                        Snackbar.make(binding.root, "Details for '$chosenSubject' not found.", Snackbar.LENGTH_LONG).show()
+                    }
                 } else {
-                    Log.d("viewMarksTAG", "inside else-unsuccessful: " + response.body()?.Msg.toString())
-                    Toast.makeText(requireContext(), "Some error occurred.", Toast.LENGTH_SHORT).show()
+                    val errorMsg = response.body()?.Msg ?: "Failed to get subject details."
+                    Snackbar.make(binding.root, errorMsg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<AssignedSubjectResponse>, t: Throwable) {
+                Log.e("ViewMarksFragment", "onFailure: getAssignedSubjects", t)
+                Toast.makeText(requireContext(), "Network error. Please try again.", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    // ## CHANGE 8: Updated function signature for loadMarks
+    private fun loadMarks(examId: String, sectionId: String, sstId: String) {
+        ApiClient.viewMarksInstance.viewMarks(
+            "application/x-www-form-urlencoded",
+            "ci_session=YOUR_DYNAMIC_SESSION_ID",
+            examId = examId, // Use the passed examId directly
+            sectionId = sectionId,
+            sstId = sstId
+        ).enqueue(object : Callback<ViewMarksResponse> {
+            override fun onResponse(call: Call<ViewMarksResponse>, response: Response<ViewMarksResponse>) {
+                if (response.isSuccessful && response.body()?.status == 1) {
+                    val marksData = response.body()?.data
+                    if (marksData.isNullOrEmpty()) {
+                        Snackbar.make(binding.root, "No marks found for this exam", Snackbar.LENGTH_LONG).show()
+                        viewMarksAdapter.submitList(emptyList())
+                    } else {
+                        fillViewMarksData(marksData)
+                    }
+                } else {
+                    val errorMsg = response.body()?.Msg ?: "Failed to load marks."
+                    Snackbar.make(binding.root, errorMsg, Snackbar.LENGTH_LONG).show()
+                    viewMarksAdapter.submitList(emptyList())
                 }
             }
 
             override fun onFailure(call: Call<ViewMarksResponse>, t: Throwable) {
-                Log.d("viewMarksTAG", "onFailure, Error: ${t.message}")
-                Toast.makeText(requireContext(), "An error has occurred. Please try again later",Toast.LENGTH_SHORT).show()
+                Log.e("ViewMarksFragment", "onFailure: viewMarks", t)
+                Toast.makeText(requireContext(), "An error has occurred. Please try again.", Toast.LENGTH_SHORT).show()
             }
         })
-
-
     }
 
     private fun fillViewMarksData(data: List<StudentViewedMark>) {
-
-        val students = mutableListOf<UploadMarksStudent>()
-
-        for (i in 0 until data.size) {
-            val item = data[i]
-            students.add(UploadMarksStudent(i + 1, item.student_id, item.name, "", item.mark.toInt()))
+        val students = data.mapIndexed { index, item ->
+            UploadMarksStudent(index + 1, item.student_id, item.name, "", item.mark.toIntOrNull() ?: 0)
         }
-
-
-
-//        // Update students with their marks
-//        students.forEach { student ->
-//            student.marks = marksMap[student.id] ?: 0
-//        }
-
         viewMarksAdapter.submitList(students)
-
     }
 
-    private fun parseMarksString(marksString: String): Map<Int, Int> {
-        val marksMap = mutableMapOf<Int, Int>()
-        marksString.split(",").forEach { entry ->
-            val parts = entry.split(":")
-            if (parts.size == 2) {
-                val studentId = parts[0].toIntOrNull()
-                val marks = parts[1].toIntOrNull()
-                if (studentId != null && marks != null) {
-                    marksMap[studentId] = marks
-                }
-            }
-        }
-        return marksMap
-    }
+    // ## CHANGE 9: The getExamId function is no longer needed and can be deleted.
 
-    private fun getStudentsList(): MutableList<UploadMarksStudent> {
-        return mutableListOf(
-            UploadMarksStudent(1, "3737", "Adriti Sonker", "Devendra Sonker"),
-            UploadMarksStudent(2, "3495", "Afifa Azeem", "Fazle Azeem Khan"),
-            UploadMarksStudent(3, "4097", "Ali Ahmad", "Rizwan Ahmad"),
-            UploadMarksStudent(4, "3384", "Aliya", "Mohd Shahid"),
-            UploadMarksStudent(5, "3389", "Aliza Ansari", "Mo Aqeel Ansari"),
-            UploadMarksStudent(6, "3553", "Anshara Haseen", "Haseen Ahmad"),
-            UploadMarksStudent(7, "3499", "Areeqa Fatima", "Mohd Wasif Sheikh"),
-            UploadMarksStudent(8, "3496", "Ariket Singh", "Ravindra Kumar"),
-            UploadMarksStudent(9, "3561", "Asna khan", "Mr. Ishaq")
-        )
-    }
-
-    private fun getExamId(examName: String): Int {
-        return when (examName) {
-            "Unit test 1" -> 1
-            "Unit test 2" -> 2
-            "Mid Term" -> 3
-            "Final Exam" -> 4
-            else -> 0
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

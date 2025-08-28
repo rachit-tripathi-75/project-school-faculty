@@ -78,6 +78,6 @@ dependencies {
     implementation("commons-io:commons-io:2.11.0")
     implementation("androidx.dynamicanimation:dynamicanimation:1.0.0")
     implementation("com.google.auth:google-auth-library-oauth2-http:1.17.0")
-
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
 }

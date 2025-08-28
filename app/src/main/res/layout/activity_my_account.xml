@@ -91,6 +91,7 @@
                             android:id="@+id/btnEditProfile"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
+                            android:visibility="gone"
                             android:layout_marginEnd="8dp"
                             android:background="@drawable/button_unselected"
                             android:drawableLeft="@drawable/ic_edit"
@@ -103,6 +104,7 @@
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnSettings"
+                            android:visibility="gone"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:background="@drawable/button_unselected"
@@ -154,7 +156,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="4dp"
-                                android:text="Teacher 1"
+                                android:text=""
                                 android:textAlignment="center"
                                 android:textColor="@color/on_surface"
                                 android:textSize="20sp"
@@ -165,7 +167,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:text="Assistant Professor"
+                                android:text=""
                                 android:textAlignment="center"
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="16sp" />
@@ -175,8 +177,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/department_badge"
+                                android:visibility="gone"
                                 android:padding="8dp"
-                                android:text="English"
+                                android:text=""
                                 android:textColor="@color/primary"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -224,7 +227,7 @@
                                         android:id="@+id/tvEmail"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="sarah.johnson@university.edu"
+                                        android:text=""
                                         android:textColor="@color/on_surface"
                                         android:textSize="14sp"
                                         android:textStyle="bold" />
@@ -267,7 +270,7 @@
                                         android:id="@+id/tvPhone"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="+1 (555) 123-4567"
+                                        android:text=""
                                         android:textColor="@color/on_surface"
                                         android:textSize="14sp"
                                         android:textStyle="bold" />
@@ -310,7 +313,7 @@
                                         android:id="@+id/tvEmpCode"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="EMP2024001"
+                                        android:text=""
                                         android:textColor="@color/on_surface"
                                         android:textSize="14sp"
                                         android:textStyle="bold" />
@@ -382,6 +385,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     app:cardBackgroundColor="@color/surface"
                     app:cardCornerRadius="12dp"
@@ -436,6 +440,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     app:cardBackgroundColor="@color/surface"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp">

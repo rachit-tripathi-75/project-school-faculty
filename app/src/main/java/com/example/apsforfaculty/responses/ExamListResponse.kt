@@ -1,17 +1,20 @@
 package com.example.apsforfaculty.responses
 
+import com.google.gson.annotations.SerializedName
+
 data class ExamListResponse(
-    val status: Int,
-    val Msg: String,
-    val data: List<ExamListExam>
+    @SerializedName("status") val status: Int,
+    @SerializedName("Msg") val msg: String,
+    @SerializedName("data") val data: List<ExamListExam>
 )
 
 data class ExamListExam(
-    val id: String,
-    val name: String,
-    val max_mark: String,
-    val created_by: String,
-    val created_on: String,
-    val status: String,
-    val sessionid: String
+    @SerializedName("id") val id: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("max_mark") val maxMark: String,
+    @SerializedName("created_by") val createdBy: String,
+    @SerializedName("created_on") val createdOn: String,
+    @SerializedName("status") val status: String,
+    @SerializedName("sessionId") val sessionId: String, // Corrected from 'sessionid' to match JSON
+    @SerializedName("academicsession") val academicSession: String // Added missing field
 )

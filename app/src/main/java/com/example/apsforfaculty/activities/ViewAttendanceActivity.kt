@@ -21,7 +21,6 @@ import com.example.apsforfaculty.classes.PrefsManager
 import com.example.apsforfaculty.databinding.ActivityViewAttendanceBinding
 import com.example.apsforfaculty.models.StudentViewAttendanceModel
 import com.example.apsforfaculty.responses.AttendanceRecord
-import com.example.apsforfaculty.responses.StudentListForMarkingAttendanceResponse
 import com.example.apsforfaculty.responses.ViewAttendanceResponse
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -251,9 +250,9 @@ class ViewAttendanceActivity : AppCompatActivity() {
         list.clear()
 
         for (i in 0 until data.size) {
-            if (data.get(i).attendance.equals("Absent")) {
+            if (data.get(i).attendance.equals("Absent", ignoreCase = true)) {
                 list.add(StudentViewAttendanceModel(data.get(i).student_name, data.get(i).student_id, data.get(i).enrollment, true))
-            } else {
+            } else if (data.get(i).attendance.equals("Absent", ignoreCase = true)){
                 list.add(StudentViewAttendanceModel(data.get(i).student_name, data.get(i).student_id, data.get(i).enrollment, false))
             }
 

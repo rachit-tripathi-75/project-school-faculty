@@ -471,9 +471,9 @@ class MarkAttendanceActivity : AppCompatActivity() {
         val attendanceList = mutableListOf<AttendanceItem>()
         for (i in 0 until students.size) {
             if (students.get(i).isPresent) {
-                attendanceList.add(AttendanceItem(students.get(i).name, 1)) // 1 ---> Present
+                attendanceList.add(AttendanceItem(students.get(i).name, 0)) // 1 ---> Present
             } else {
-                attendanceList.add(AttendanceItem(students.get(i).name, 0)) // 0 ---> Absent
+                attendanceList.add(AttendanceItem(students.get(i).name, 1)) // 0 ---> Absent
             }
         }
 
