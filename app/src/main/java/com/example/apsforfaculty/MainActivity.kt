@@ -249,6 +249,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getDashboardItems(): List<DashboardItem> {
         return listOf(
+            DashboardItem(R.drawable.ic_notice_board, "Notice Board"),
             DashboardItem(R.drawable.attendance, "Mark Attendance"),
             DashboardItem(R.drawable.viewattendance, "View Attendance"),
             DashboardItem(R.drawable.uploadmarks, "Upload Marks"),

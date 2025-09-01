@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apsforfaculty.R
+import com.example.apsforfaculty.models.UploadMarksListModel
 import com.example.apsforfaculty.models.UploadMarksSubject
 
 // this is used in Uploading marks of student.........
-class SubjectAdapter(private val onUploadClick: (UploadMarksSubject) -> Unit, private val onViewClick: (UploadMarksSubject) -> Unit) : ListAdapter<UploadMarksSubject, SubjectAdapter.SubjectViewHolder>(SubjectDiffCallback()) {
+class SubjectAdapter(private val onUploadClick: (UploadMarksListModel) -> Unit, private val onViewClick: (UploadMarksListModel) -> Unit) : ListAdapter<UploadMarksListModel, SubjectAdapter.SubjectViewHolder>(SubjectDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -33,9 +34,9 @@ class SubjectAdapter(private val onUploadClick: (UploadMarksSubject) -> Unit, pr
         private val btnUpload: ImageButton = itemView.findViewById(R.id.btn_upload)
         private val btnView: ImageButton = itemView.findViewById(R.id.btn_view)
 
-        fun bind(subject: UploadMarksSubject) {
+        fun bind(subject: UploadMarksListModel) {
             tvSrNo.text = (adapterPosition + 1).toString()
-            tvSection.text = subject.section
+            tvSection.text = subject.mainSectionName
             tvTeacher.text = subject.teacherName
             tvSubject.text = subject.subjectName
 
@@ -44,12 +45,12 @@ class SubjectAdapter(private val onUploadClick: (UploadMarksSubject) -> Unit, pr
         }
     }
 
-    class SubjectDiffCallback : DiffUtil.ItemCallback<UploadMarksSubject>() {
-        override fun areItemsTheSame(oldItem: UploadMarksSubject, newItem: UploadMarksSubject): Boolean {
-            return oldItem.id == newItem.id
+    class SubjectDiffCallback : DiffUtil.ItemCallback<UploadMarksListModel>() {
+        override fun areItemsTheSame(oldItem: UploadMarksListModel, newItem: UploadMarksListModel): Boolean {
+            return oldItem.sstId == newItem.sstId
         }
 
-        override fun areContentsTheSame(oldItem: UploadMarksSubject, newItem: UploadMarksSubject): Boolean {
+        override fun areContentsTheSame(oldItem: UploadMarksListModel, newItem: UploadMarksListModel): Boolean {
             return oldItem == newItem
         }
     }

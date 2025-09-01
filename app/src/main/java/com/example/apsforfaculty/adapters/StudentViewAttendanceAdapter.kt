@@ -1,6 +1,5 @@
 package com.example.apsforfaculty.adapters
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apsforfaculty.R
+import com.example.apsforfaculty.models.AttendanceStatus // ✅ Naya model import karna zaroori hai
 import com.example.apsforfaculty.models.StudentViewAttendanceModel
 
 class StudentViewAttendanceAdapter(
@@ -27,6 +27,7 @@ class StudentViewAttendanceAdapter(
         return ViewHolder(view)
     }
 
+    // Yeh function bilkul sahi hai aur ismein koi change nahi chahiye.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val student = studentList[position]
 
@@ -35,15 +36,12 @@ class StudentViewAttendanceAdapter(
         holder.tvRollNumber.text = student.rollNumber
         holder.tvAttendanceStatus.text = student.getAttendanceStatus()
 
-        // Set status styling
         holder.tvAttendanceStatus.setTextColor(
             ContextCompat.getColor(holder.itemView.context, student.getStatusColor())
         )
         holder.tvAttendanceStatus.setBackgroundResource(student.getStatusBackground())
 
-        // Add click listener for future functionality
         holder.itemView.setOnClickListener {
-            // Handle item click - could show student details
             onItemClickListener?.invoke(student, position)
         }
     }
@@ -61,15 +59,18 @@ class StudentViewAttendanceAdapter(
         } else null
     }
 
+    // ✅ YAHAN CHANGES KIYE GAYE HAIN
     fun getPresentStudents(): List<StudentViewAttendanceModel> {
-        return studentList.filter { it.isPresent }
+        // Ab hum 'status' enum se check karenge
+        return studentList.filter { it.status == AttendanceStatus.PRESENT }
     }
 
+    // ✅ YAHAN BHI CHANGES KIYE GAYE HAIN
     fun getAbsentStudents(): List<StudentViewAttendanceModel> {
-        return studentList.filter { !it.isPresent }
+        // Ab hum 'status' enum se check karenge
+        return studentList.filter { it.status == AttendanceStatus.ABSENT }
     }
 
-    // Click listener for item interactions
     private var onItemClickListener: ((StudentViewAttendanceModel, Int) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (StudentViewAttendanceModel, Int) -> Unit) {

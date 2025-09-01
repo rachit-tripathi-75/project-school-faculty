@@ -8,6 +8,7 @@ import com.example.apsforfaculty.responses.AssignedSubjectResponse
 import com.example.apsforfaculty.responses.ExamListResponse
 import com.example.apsforfaculty.responses.LoginResponse
 import com.example.apsforfaculty.responses.MarkStudentAttendanceResponse
+import com.example.apsforfaculty.responses.NoticeDetailResponse
 import com.example.apsforfaculty.responses.SectionWiseStudentListResponse
 import com.example.apsforfaculty.responses.SectionWithSubjectResponse
 import com.example.apsforfaculty.responses.StudentListForMarkingAttendanceResponse
@@ -162,6 +163,22 @@ class ApiServices {
             @Part("teacher_id") teacherId: RequestBody,
             @Part file: MultipartBody.Part
         ): retrofit2.Response<UploadWorkResponse>
+    }
+
+    interface GetNoticeDetailApiService {
+        @POST("API/getNoticedetail")
+        fun getNoticeDetail(
+            @Header("Authorization") authorization: String,
+            @Header("Cookie") cookie: String
+        ): Call<NoticeDetailResponse>
+    }
+
+    interface DownloadPdfApiService {
+        @Streaming
+        @POST("assets/doc/{pdf_name}")
+        fun downloadPdf(
+            @Path("pdf_name") pdfName: String
+        ): Call<ResponseBody>
     }
 
 

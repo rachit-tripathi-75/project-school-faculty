@@ -13,6 +13,7 @@ import androidx.constraintlayout.motion.widget.ViewTransition
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apsforfaculty.R
 import com.example.apsforfaculty.activities.MarkAttendanceActivity
+import com.example.apsforfaculty.activities.NoticeBoardActivity
 import com.example.apsforfaculty.activities.UploadMarksActivity
 import com.example.apsforfaculty.activities.UploadPracticeSheetActivity
 import com.example.apsforfaculty.activities.UploadWorkActivity
@@ -62,15 +63,18 @@ class DashboardAdapter(val context: Context, private val items: List<DashboardIt
             animateCardClick(view)
             when (position) {
                 0 -> {
-                    context.startActivity(Intent(context, MarkAttendanceActivity::class.java))
+                    context.startActivity(Intent(context, NoticeBoardActivity::class.java))
                 }
                 1 -> {
-                    context.startActivity(Intent(context, ViewAttendanceActivity::class.java))
+                    context.startActivity(Intent(context, MarkAttendanceActivity::class.java))
                 }
                 2 -> {
-                    context.startActivity(Intent(context, UploadMarksActivity::class.java))
+                    context.startActivity(Intent(context, ViewAttendanceActivity::class.java))
                 }
                 3 -> {
+                    context.startActivity(Intent(context, UploadMarksActivity::class.java))
+                }
+                4 -> {
                     context.startActivity(Intent(context, UploadWorkActivity::class.java))
                 }
 //                4 -> {

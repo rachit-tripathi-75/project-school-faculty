@@ -29,3 +29,12 @@ data class UploadMarksStudentMark(
     val marks: Int,
     val createdAt: String = System.currentTimeMillis().toString()
 )
+
+data class UploadMarksListModel(
+    val sstId: String,
+    val sectionId: String,
+    val subId: String,
+    val subjectName: String,
+    val mainSectionName: String,
+    val teacherName: String
+)

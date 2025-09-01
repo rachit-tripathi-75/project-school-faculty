@@ -14,6 +14,7 @@ import com.example.apsforfaculty.adapters.ViewMarksAdapter
 import com.example.apsforfaculty.classes.ApiClient
 import com.example.apsforfaculty.classes.PrefsManager
 import com.example.apsforfaculty.databinding.FragmentViewMarksBinding
+import com.example.apsforfaculty.models.UploadMarksListModel
 import com.example.apsforfaculty.models.UploadMarksStudent
 import com.example.apsforfaculty.models.UploadMarksSubject
 import com.example.apsforfaculty.responses.AssignedSubjectResponse
@@ -44,12 +45,12 @@ class ViewMarksFragment : Fragment() {
         private const val ARG_SECTION = "section"
         private const val ARG_TEACHER_NAME = "teacher_name"
 
-        fun newInstance(subject: UploadMarksSubject): ViewMarksFragment {
+        fun newInstance(subject: UploadMarksListModel): ViewMarksFragment {
             val fragment = ViewMarksFragment()
             val bundle = Bundle().apply {
-                putInt(ARG_SUBJECT_ID, subject.id)
+                putInt(ARG_SUBJECT_ID, subject.subId.toInt())
                 putString(ARG_SUBJECT_NAME, subject.subjectName)
-                putString(ARG_SECTION, subject.section)
+                putString(ARG_SECTION, subject.mainSectionName)
                 putString(ARG_TEACHER_NAME, subject.teacherName)
             }
             fragment.arguments = bundle
@@ -151,6 +152,7 @@ class ViewMarksFragment : Fragment() {
     // ## CHANGE 6: Updated function to accept examId
     private fun fetchSubjectDetailsAndLoadMarks(chosenSubject: String, examId: String) {
         val teacherId = PrefsManager.getTeacherDetailedInformation(requireContext()).data.id
+        Log.d("teacheridxxx", teacherId)
         ApiClient.assignedSubjectInstance.getAssignedSubjects(
             "application/x-www-form-urlencoded",
             "ci_session=YOUR_DYNAMIC_SESSION_ID",

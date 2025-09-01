@@ -11,6 +11,7 @@ import com.example.apsforfaculty.activities.UploadMarksActivity
 import com.example.apsforfaculty.R
 import com.example.apsforfaculty.classes.ApiClient
 import com.example.apsforfaculty.databinding.FragmentUploadMarksBinding
+import com.example.apsforfaculty.models.UploadMarksListModel
 import com.example.apsforfaculty.models.UploadMarksSubject
 import com.example.apsforfaculty.responses.ExamListExam
 import com.example.apsforfaculty.responses.ExamListResponse
@@ -33,12 +34,12 @@ class UploadMarksFragment : Fragment() {
         private const val ARG_SECTION = "section"
         private const val ARG_TEACHER_NAME = "teacher_name"
 
-        fun newInstance(subject: UploadMarksSubject): UploadMarksFragment {
+        fun newInstance(subject: UploadMarksListModel): UploadMarksFragment {
             val fragment = UploadMarksFragment()
             val bundle = Bundle().apply {
-                putInt(ARG_SUBJECT_ID, subject.id)
+                putInt(ARG_SUBJECT_ID, subject.subId.toInt())
                 putString(ARG_SUBJECT_NAME, subject.subjectName)
-                putString(ARG_SECTION, subject.section)
+                putString(ARG_SECTION, subject.mainSectionName)
                 putString(ARG_TEACHER_NAME, subject.teacherName)
             }
             fragment.arguments = bundle

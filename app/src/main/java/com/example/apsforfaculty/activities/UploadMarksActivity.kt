@@ -17,6 +17,7 @@ import com.example.apsforfaculty.fragments.SubjectListFragment
 import com.example.apsforfaculty.fragments.UploadMarksFragment
 import com.example.apsforfaculty.fragments.ViewMarksFragment
 import com.example.apsforfaculty.models.StudentMark
+import com.example.apsforfaculty.models.UploadMarksListModel
 import com.example.apsforfaculty.models.UploadMarksSubject
 
 class UploadMarksActivity : AppCompatActivity() {
@@ -57,7 +58,7 @@ class UploadMarksActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun navigateToUploadMarks(subject: UploadMarksSubject) {
+    fun navigateToUploadMarks(subject: UploadMarksListModel) {
         val fragment = UploadMarksFragment.newInstance(subject)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
@@ -73,7 +74,7 @@ class UploadMarksActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun navigateToViewMarks(subject: UploadMarksSubject) {
+    fun navigateToViewMarks(subject: UploadMarksListModel) {
         val fragment = ViewMarksFragment.newInstance(subject)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)

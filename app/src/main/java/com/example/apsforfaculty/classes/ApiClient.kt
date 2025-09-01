@@ -118,4 +118,20 @@ object ApiClient {
             .create(ApiServices.UploadWorkApiService::class.java)
     }
 
+    val getNoticeDetailInstance: ApiServices.GetNoticeDetailApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiServices.GetNoticeDetailApiService::class.java)
+    }
+
+    val downloadPdfInstance: ApiServices.DownloadPdfApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiServices.DownloadPdfApiService::class.java)
+    }
+
 }
