@@ -66,8 +66,8 @@ class UploadMarksActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun navigateToMarksEntry(subject: UploadMarksSubject, exam: String) {
-        val fragment = MarksEntryFragment.newInstance(subject, exam)
+    fun navigateToMarksEntry(subject: UploadMarksSubject, examId: String, examName: String) {
+        val fragment = MarksEntryFragment.newInstance(subject, examId, examName)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)

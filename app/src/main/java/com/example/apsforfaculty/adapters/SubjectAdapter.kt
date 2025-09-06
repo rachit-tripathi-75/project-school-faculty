@@ -1,5 +1,6 @@
 package com.example.apsforfaculty.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,9 @@ class SubjectAdapter(private val onUploadClick: (UploadMarksListModel) -> Unit, 
             tvTeacher.text = subject.teacherName
             tvSubject.text = subject.subjectName
 
-            btnUpload.setOnClickListener { onUploadClick(subject) }
+            btnUpload.setOnClickListener {
+                onUploadClick(subject)
+            }
             btnView.setOnClickListener { onViewClick(subject) }
         }
     }

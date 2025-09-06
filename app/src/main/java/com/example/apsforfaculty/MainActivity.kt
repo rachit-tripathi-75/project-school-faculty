@@ -20,6 +20,7 @@ import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.apsforfaculty.activities.ChangePasswordActivity
 import com.example.apsforfaculty.activities.ContactUsActivity
 import com.example.apsforfaculty.activities.LoginActivity
 import com.example.apsforfaculty.activities.MyAccountActivity
@@ -172,9 +173,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_account -> {
                     startActivity(Intent(this@MainActivity, MyAccountActivity::class.java))
                 }
-                // Handle other menu items
+
                 R.id.nav_contact -> {
                     startActivity(Intent(this@MainActivity, ContactUsActivity::class.java))
+                }
+                R.id.nav_change_password -> {
+                    startActivity(Intent(this@MainActivity, ChangePasswordActivity::class.java))
                 }
             }
 

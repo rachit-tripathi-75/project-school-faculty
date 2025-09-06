@@ -33,6 +33,8 @@ class ViewMarksFragment : Fragment() {
     private lateinit var viewMarksAdapter: ViewMarksAdapter
     private var _binding: FragmentViewMarksBinding? = null
     private val binding get() = _binding!!
+    private lateinit var sstId: String
+    private lateinit var sectionId: String
 
     // ## CHANGE 1: Property to hold the fetched list of exams
     private var examList: List<ExamListExam> = emptyList()
@@ -44,6 +46,7 @@ class ViewMarksFragment : Fragment() {
         private const val ARG_SUBJECT_NAME = "subject_name"
         private const val ARG_SECTION = "section"
         private const val ARG_TEACHER_NAME = "teacher_name"
+        private const val ARG_SECTION_ID = "section_id"
 
         fun newInstance(subject: UploadMarksListModel): ViewMarksFragment {
             val fragment = ViewMarksFragment()
@@ -62,10 +65,11 @@ class ViewMarksFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let { bundle ->
             subject = UploadMarksSubject(
-                id = bundle.getInt(ARG_SUBJECT_ID),
+                subId = bundle.getString(ARG_SUBJECT_ID),
                 section = bundle.getString(ARG_SECTION, ""),
                 teacherName = bundle.getString(ARG_TEACHER_NAME, ""),
-                subjectName = bundle.getString(ARG_SUBJECT_NAME, "")
+                subjectName = bundle.getString(ARG_SUBJECT_NAME, ""),
+                sectionId = bundle.getString(ARG_SECTION_ID, "")
             )
         }
     }

@@ -12,6 +12,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsCompat.Type
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,32 +43,38 @@ class MarksEntryFragment : Fragment() {
 
     private lateinit var subject: UploadMarksSubject
     private lateinit var examName: String
+    private lateinit var sectionId: String
+    private lateinit var examId: String
     private lateinit var tvSubjectName: TextView
     private lateinit var etExam: EditText
     private lateinit var etSection: EditText
     private lateinit var btnSubmitMarks: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var studentMarksAdapter: StudentMarksAdapter
-    private lateinit var sharedPreferences: SharedPreferences
     private var sstId: String = "-1"
     private lateinit var binding: FragmentMarksEntryBinding
     private var sstIdFlag: Boolean = false
 
     companion object {
         private const val ARG_SUBJECT_ID = "subject_id"
-        private const val ARG_SUBJECT_NAME = "subject_name"
-        private const val ARG_SECTION = "section"
+        private const val ARG_SECTION = "main_sec_name"
         private const val ARG_TEACHER_NAME = "teacher_name"
+        private const val ARG_SUBJECT_NAME = "subject_name"
+        private const val ARG_SECTION_ID = "section_id"
+        private const val ARG_EXAM_ID = "exam_id"
         private const val ARG_EXAM_NAME = "exam_name"
 
-        fun newInstance(subject: UploadMarksSubject, examName: String): MarksEntryFragment {
+        fun newInstance(subject: UploadMarksSubject, examId: String, examName: String): MarksEntryFragment {
             val fragment = MarksEntryFragment()
             val bundle = Bundle().apply {
-                putInt(ARG_SUBJECT_ID, subject.id)
-                putString(ARG_SUBJECT_NAME, subject.subjectName)
+                putString(ARG_SUBJECT_ID, subject.subId)
                 putString(ARG_SECTION, subject.section)
                 putString(ARG_TEACHER_NAME, subject.teacherName)
+                putString(ARG_SUBJECT_NAME, subject.subjectName)
+                putString(ARG_SECTION_ID, subject.sectionId)
+                putString(ARG_EXAM_ID, examId)
                 putString(ARG_EXAM_NAME, examName)
+
             }
             fragment.arguments = bundle
             return fragment
@@ -75,15 +85,16 @@ class MarksEntryFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let { bundle ->
             subject = UploadMarksSubject(
-                id = bundle.getInt(ARG_SUBJECT_ID),
+                subId = bundle.getString(ARG_SUBJECT_ID),
                 section = bundle.getString(ARG_SECTION, ""),
                 teacherName = bundle.getString(ARG_TEACHER_NAME, ""),
-                subjectName = bundle.getString(ARG_SUBJECT_NAME, "")
+                subjectName = bundle.getString(ARG_SUBJECT_NAME, ""),
+                sectionId = bundle.getString(ARG_SECTION_ID, "")
             )
+            sectionId = bundle.getString(ARG_SECTION_ID, "")
+            examId = bundle.getString(ARG_EXAM_ID, "")
             examName = bundle.getString(ARG_EXAM_NAME, "")
         }
-        sharedPreferences =
-            requireContext().getSharedPreferences("student_marks", Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(
@@ -97,6 +108,13 @@ class MarksEntryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Attach window insets listener to root view
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val imeHeight = insets.getInsets(Type.ime()).bottom
+            v.updatePadding(bottom = imeHeight)
+            // Return the insets so it won't block others
+            insets
+        }
 
         setupViews(view)
         setupRecyclerView()
@@ -193,7 +211,7 @@ class MarksEntryFragment : Fragment() {
         ApiClient.sectionWiseStudentListDetailInstance.getSectionWiseStudents(
             "application/x-www-form-urlencoded",
             "ci_session=cof7n2dje9kjg780mnvl95au1rt7usof",
-            "1"
+            sectionId
         ).enqueue(object : retrofit2.Callback<SectionWiseStudentListResponse> { // 1 means sec_id
             override fun onResponse(
                 call: Call<SectionWiseStudentListResponse>,
@@ -306,7 +324,7 @@ class MarksEntryFragment : Fragment() {
             )
         }
 
-        val s = UploadMarksRequest(exam_id = "1", section_id = "1", "89", uploadMarksData)
+        val s = UploadMarksRequest(exam_id = examId, section_id = sectionId, sstId, uploadMarksData)
 
 
 

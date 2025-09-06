@@ -5,6 +5,7 @@ import com.example.apsforfaculty.requests.SectionWithSubjectRequest
 import com.example.apsforfaculty.requests.TimeTableRequest
 import com.example.apsforfaculty.requests.UploadMarksRequest
 import com.example.apsforfaculty.responses.AssignedSubjectResponse
+import com.example.apsforfaculty.responses.ChangePasswordResponse
 import com.example.apsforfaculty.responses.ExamListResponse
 import com.example.apsforfaculty.responses.LoginResponse
 import com.example.apsforfaculty.responses.MarkStudentAttendanceResponse
@@ -179,6 +180,17 @@ class ApiServices {
         fun downloadPdf(
             @Path("pdf_name") pdfName: String
         ): Call<ResponseBody>
+    }
+
+    interface ChangePasswordApiService {
+        @FormUrlEncoded
+        @POST("API/updateTeacherPassword")
+        fun updatePassword(
+            @Header("Content-Type") contentType: String,
+            @Header("Cookie") cookie: String,
+            @Field("teacher_id") teacherId: String,
+            @Field("new_password") newPassword: String,
+        ): Call<ChangePasswordResponse>
     }
 
 

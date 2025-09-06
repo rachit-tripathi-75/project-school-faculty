@@ -247,6 +247,36 @@
     <color name="orange">#FF9800</color>
 
 
+    <color name="white_80">#CCFFFFFF</color>
+
+
+    <color name="foreground">#0F172A</color>
+    <color name="card">#FFFFFF</color>
+    <color name="card_foreground">#0F172A</color>
+    <color name="primary_foreground">#FFFFFF</color>>
+    <color name="secondary_foreground">#0F172A</color>
+    <color name="accent_foreground">#0F172A</color>
+    <color name="muted">#F8FAFC</color>
+    <color name="muted_foreground">#64748B</color>
+    <color name="destructive">#EF4444</color>
+    <color name="destructive_foreground">#FFFFFF</color>
+    <color name="success_foreground">#FFFFFF</color>
+    <color name="warning_foreground">#FFFFFF</color>
+
+    <!-- Border colors -->
+    <color name="border">#E2E8F0</color>
+    <color name="input">#E2E8F0</color>
+
+    <!-- Password strength colors -->
+    <color name="strength_weak">#EF4444</color>
+    <color name="strength_medium">#F59E0B</color>
+    <color name="strength_strong">#10B981</color>
+
+
 </resources>
+
+
+
+
 
 

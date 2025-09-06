@@ -134,4 +134,12 @@ object ApiClient {
             .create(ApiServices.DownloadPdfApiService::class.java)
     }
 
+    val changePasswordInstance: ApiServices.ChangePasswordApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiServices.ChangePasswordApiService::class.java)
+    }
+
 }

@@ -26,6 +26,7 @@ class UploadMarksFragment : Fragment() {
     private lateinit var etSection: EditText
     private lateinit var btnSubmit: Button
     private lateinit var btnBack: Button
+    private var examList: List<ExamListExam> = emptyList()
     private lateinit var binding: FragmentUploadMarksBinding
 
     companion object {
@@ -33,14 +34,16 @@ class UploadMarksFragment : Fragment() {
         private const val ARG_SUBJECT_NAME = "subject_name"
         private const val ARG_SECTION = "section"
         private const val ARG_TEACHER_NAME = "teacher_name"
+        private const val ARG_SECTION_ID = "section_id"
 
         fun newInstance(subject: UploadMarksListModel): UploadMarksFragment {
             val fragment = UploadMarksFragment()
             val bundle = Bundle().apply {
-                putInt(ARG_SUBJECT_ID, subject.subId.toInt())
+                putString(ARG_SUBJECT_ID, subject.subId)
                 putString(ARG_SUBJECT_NAME, subject.subjectName)
                 putString(ARG_SECTION, subject.mainSectionName)
                 putString(ARG_TEACHER_NAME, subject.teacherName)
+                putString(ARG_SECTION_ID, subject.sectionId)
             }
             fragment.arguments = bundle
             return fragment
@@ -51,10 +54,11 @@ class UploadMarksFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let { bundle ->
             subject = UploadMarksSubject(
-                id = bundle.getInt(ARG_SUBJECT_ID),
+                subId = bundle.getString(ARG_SUBJECT_ID),
                 section = bundle.getString(ARG_SECTION, ""),
                 teacherName = bundle.getString(ARG_TEACHER_NAME, ""),
-                subjectName = bundle.getString(ARG_SUBJECT_NAME, "")
+                subjectName = bundle.getString(ARG_SUBJECT_NAME, ""),
+                sectionId = bundle.getString(ARG_SECTION_ID, "")
             )
         }
     }
@@ -121,8 +125,12 @@ class UploadMarksFragment : Fragment() {
     }
 
     private fun fillSpinner(data: List<ExamListExam>) {
-        val examNames = mutableListOf("--Select Exam--")
-        examNames.addAll(data.map { it.name })
+        examList = data
+        val examNames = mutableListOf("--Select Exam--").apply {
+            addAll(data.map {
+                it.name
+            })
+        }
 
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, examNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -132,9 +140,11 @@ class UploadMarksFragment : Fragment() {
 
     private fun setupClickListeners() {
         btnSubmit.setOnClickListener {
+            val selectedPosition = spinnerExam.selectedItemPosition
             val selectedExam = spinnerExam.selectedItem.toString()
-            if (selectedExam != "--Select Exam--") {
-                (activity as UploadMarksActivity).navigateToMarksEntry(subject, selectedExam)
+            if (selectedPosition > 0) {
+                val selectedExamId = examList[selectedPosition - 1].id
+                (activity as UploadMarksActivity).navigateToMarksEntry(subject, selectedExamId, selectedExam)
             } else {
                 Toast.makeText(context, "Please select an exam", Toast.LENGTH_SHORT).show()
             }

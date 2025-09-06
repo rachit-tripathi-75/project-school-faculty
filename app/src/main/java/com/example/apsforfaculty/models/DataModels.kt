@@ -3,10 +3,11 @@ package com.example.apsforfaculty.models
 // this is used in uploading marks of student.........
 
 data class UploadMarksSubject(
-    val id: Int,
-    val section: String,
-    val teacherName: String,
-    val subjectName: String
+    val subId: String?,
+    val section: String?,
+    val teacherName: String?,
+    val subjectName: String?,
+    val sectionId: String
 )
 
 data class UploadMarksStudent(

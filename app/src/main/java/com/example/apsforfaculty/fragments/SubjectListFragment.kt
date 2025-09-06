@@ -50,6 +50,8 @@ class SubjectListFragment : Fragment() {
 
         subjectAdapter = SubjectAdapter(
             onUploadClick = { subject ->
+                val gson = Gson()
+                Log.d("passedsubject", gson.toJson(subject))
                 (activity as UploadMarksActivity).navigateToUploadMarks(subject)
             },
             onViewClick = { subject ->
@@ -77,21 +79,22 @@ class SubjectListFragment : Fragment() {
             ) {
 
                 if (response.isSuccessful) {
-                    Log.d("viewAttendanceTAG", response.body()?.Msg.toString())
+                    Log.d("sectionWithSubjectsTAG", response.body()?.Msg.toString())
                     val s = response.body()
                     if (s?.status == 1) {
                         if (s.data.isEmpty()) {
                             Snackbar.make(binding.root, s.Msg, Snackbar.LENGTH_LONG).show()
+                            val gson = Gson()
                             Log.d(
                                 "sectionWithSubjectsTAG",
-                                "inside if-data-is-empty: " + response.body()?.Msg.toString()
+                                "inside if-data-is-empty: " + gson.toJson(response.body()?.data)
                             )
                         } else if (s.data.isNotEmpty()) {
                             fillSubjects(s.data)
                             val gson = Gson()
                             Log.d(
                                 "sectionWithSubjectsTAG",
-                                "inside if-data-is-not-empty: " + gson.toJson(response.body()?.Msg.toString())
+                                "inside if-data-is-not-empty: " + gson.toJson(response.body()?.data)
                             )
                         }
                     } else {

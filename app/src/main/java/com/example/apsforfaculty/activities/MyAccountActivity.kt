@@ -30,15 +30,12 @@ class MyAccountActivity : AppCompatActivity() {
         binding = ActivityMyAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // initialisers() // This function is empty, can be removed or used later
         listeners()
-
-        // Fetch data from the API when the activity is created
         fetchTeacherDetails()
     }
 
     private fun fetchTeacherDetails() {
-        // Assume you get teacher ID from your PrefsManager
+
         val teacherId = PrefsManager.getTeacherDetailedInformation(this).data.id
         val contentType = "application/x-www-form-urlencoded"
         val cookie = "ci_session=snunhleb4451tl3ebdp5ao6cfrml3anq"
@@ -65,34 +62,41 @@ class MyAccountActivity : AppCompatActivity() {
     private fun updateUi(teacher: TeacherDetails) {
         binding.apply {
             // Set basic text information
-            tvTeacherName.text = teacher.name
-            tvEmail.text = teacher.email
-            tvPhone.text = teacher.phone
+            tvName.text = teacher.name
+            tvEmailValue.text = teacher.email
+            tvPhoneValue.text = teacher.phone
             tvEmpCode.text = teacher.emp_code
-
-            // The API provides "teacher" for role. We can capitalize it for better display.
-            tvDesignation.text = teacher.role.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString()
-            }
+            tvUsernameValue.text = teacher.username
+            tvFatherNameValue.text = teacher.father_name
+            tvMotherNameValue.text = teacher.mother_name
+            tvGenderValue.text = teacher.gender
+            tvDOBValue.text = teacher.dob
+            tvBloodGroupValue.text = teacher.blood_group
+            tvPhoneValue.text = teacher.phone
+            tvHomeContactValue.text = teacher.homecontact
+            tvAddressValue.text = teacher.address
+            tvPermanentAddressValue.text = teacher.per_address
+            tvAadhaarValue.text = teacher.adhaar
+            tvPanValue.text = teacher.pan
+            tvBankValue.text = teacher.bank
+            tvAccountHolderValue.text = teacher.accountholdername
+            tvAccountNumberValue.text = teacher.bankaccountnumber
+            tvIfscValue.text = teacher.ifsc
+            tvJoinDateValue.text = teacher.joindate
+            chipRole.text = teacher.role
+            chipAcademicYear.text = teacher.academic_year
 
             // Load the profile image using Glide
             Glide.with(this@MyAccountActivity)
                 .load(teacher.image_url)
-                .placeholder(R.drawable.ic_person) // Default image while loading
-                .error(R.drawable.ic_person)      // Image if loading fails
+                .placeholder(R.drawable.ic_person_placeholder) // Default image while loading
+                .error(R.drawable.ic_person_placeholder)      // Image if loading fails
                 .circleCrop()                       // Make the image circular
-                .into(ivProfilePicture)
+                .into(binding.civProfileImage)
         }
     }
 
     private fun listeners() {
-        binding.btnEditProfile.setOnClickListener {
-            startActivity(Intent(this@MyAccountActivity, EditProfileActivity::class.java))
-        }
-
-        binding.btnSettings.setOnClickListener {
-            startActivity(Intent(this@MyAccountActivity, SettingsActivity::class.java))
-        }
 
         binding.ivBack.setOnClickListener {
             onBackPressed()
