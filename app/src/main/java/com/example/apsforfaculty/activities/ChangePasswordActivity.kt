@@ -33,7 +33,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChangePasswordBinding
     private val passwordRequirements = listOf(
-        PasswordRequirement("At least 8 characters", Pattern.compile(".{8,}")),
+        PasswordRequirement("At least 6 characters", Pattern.compile(".{6,}")),
         PasswordRequirement("One uppercase letter", Pattern.compile("[A-Z]")),
         PasswordRequirement("One lowercase letter", Pattern.compile("[a-z]")),
         PasswordRequirement("One number", Pattern.compile("\\d")),
